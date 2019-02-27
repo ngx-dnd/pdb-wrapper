@@ -1,8 +1,16 @@
 {
-  "name": "@ngx-dnd/pdb",
-  "version": "0.0.1",
-  "peerDependencies": {
-    "@angular/common": "^7.2.0",
-    "@angular/core": "^7.2.0"
+  "name": "@ngx-dnd/pdb-wrapper",
+  "version": "0.0.3",
+  "description": "Angular PouchDB wrapper",
+  "main": "public_api.ts",
+  "repository": "https://github.com/ngx-dnd/pdb-wrapper.git",
+  "author": "Mirek Grzegorczyk <mirek.grzegorczyk@gmail.com>",
+  "license": "MIT",
+  "private": false,
+  "dependencies": {
+    "@types/pouchdb": "^6.x",
+    "pouchdb": "^7.x",
+    "pouchdb-browser": "^7.x",
+    "pouchdb-find": "^7.x"
   }
 }
