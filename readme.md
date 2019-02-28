@@ -1,20 +1,30 @@
+
 # pdb-wrapper
 
 ## Install
-1. Install npm plugin:
 
-'''
-npm i @ngx-dnd/pdb-wrapper
-'''
+### Install npm plugin
+ 
+
+    npm i @ngx-dnd/pdb-wrapper 
 
 or
 
-'''
-yarn add @ngx-dnd/pdb-wrapper
-'''
+    yarn add @ngx-dnd/pdb-wrapper
 
-2. Add to your tsconfig.json line:
+### If have a error
 
-'''
-"allowSyntheticDefaultImports": true,
-'''
+> "error TS1192: Module '"/app/node_modules/@types/pouchdb/index"' has
+> no default export."
+
+ add to your tsconfig.json line:
+
+    "allowSyntheticDefaultImports": true,
+
+
+
+
+
+
+
+

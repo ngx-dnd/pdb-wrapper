@@ -11,11 +11,11 @@ PouchDB.plugin(PouchFind);
 export class PdbInitService {
   constructor() {}
 
-  set_basename(basename:string) {
+  set_basename(basename: string) {
     localStorage.setItem('basename', basename);
   }
 
-  get_basename(){
+  get_basename() {
     localStorage.getItem('basename');
   }
 }
