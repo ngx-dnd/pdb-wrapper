@@ -9,5 +9,6 @@ read -p "Build new version and push to npm? [Y/n]: " buildOption
 if [[ $buildOption = n ]]; then echo "OK, done"
 else
         ng build @ngx-dnd/pdb
-        yarn publish /app/dist/ngx-dnd/pdb/package.json
+        yarn publish /app/dist/ngx-dnd/pdb/
 fi
+
