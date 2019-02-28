@@ -20,11 +20,3 @@ or
  add to your tsconfig.json line:
 
     "allowSyntheticDefaultImports": true,
-
-
-
-
-
-
-
-
