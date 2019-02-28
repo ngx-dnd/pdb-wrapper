@@ -8,14 +8,22 @@ PouchDB.plugin(PouchFind);
   providedIn: 'root'
 })
 
-export class PdbInitService {
+export class PdbInit {
   constructor() {}
 
-  set_basename(basename: string) {
-    localStorage.setItem('basename', basename);
+  set_basename(data: string) {
+    localStorage.setItem('pdb_basename', data);
   }
 
-  get_basename() {
-    localStorage.getItem('basename');
+  set_console_log(data: string) {
+    localStorage.setItem('pdb_console_log', data);
   }
+
+  db_connect() {
+    return new PouchDB(localStorage.getItem('pdb_basename'));
+  }
+
+
+
 }
+
