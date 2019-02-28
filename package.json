@@ -1,6 +1,6 @@
 {
   "name": "@ngx-dnd/pdb-wrapper",
-  "version": "0.0.10",
+  "version": "0.0.11",
   "description": "Angular PouchDB wrapper",
   "main": "./src/public_api.ts",
   "repository": "https://github.com/ngx-dnd/pdb-wrapper.git",
