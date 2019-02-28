@@ -1,16 +1,18 @@
 import { Injectable } from '@angular/core';
 import PouchDB from 'pouchdb';
 import PouchFind from 'pouchdb-find';
+import { PdbInitService } from './pdb-init.service';
 PouchDB.plugin(PouchFind);
-import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 
 export class PdbCoreService {
-  constructor() {}
-  baseName = environment.pdbConfig.base_name;
+  constructor(
+    private initdb: PdbInitService
+  ) {}
+  baseName: any = this.initdb.get_basename;
 
   db_connect() {
     return new PouchDB(this.baseName);
@@ -32,7 +34,7 @@ export class PdbCoreService {
       });
   }
 
-  change(id: string, new_data: any) {
+  change(id: string, data: any) {
     const db = this.db_connect();
     db.get(id)
       .then(function(doc: any) {
@@ -40,7 +42,7 @@ export class PdbCoreService {
           _id: id,
           _rev: doc._rev,
           type: doc.type,
-          data: new_data
+          data: data
         });
       })
       .then(function(response) {

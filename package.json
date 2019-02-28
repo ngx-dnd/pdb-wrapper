@@ -1,8 +1,8 @@
 {
   "name": "@ngx-dnd/pdb-wrapper",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "Angular PouchDB wrapper",
-  "main": "public_api.ts",
+  "main": "./src/public_api.ts",
   "repository": "https://github.com/ngx-dnd/pdb-wrapper.git",
   "author": "Mirek Grzegorczyk <mirek.grzegorczyk@gmail.com>",
   "license": "MIT",

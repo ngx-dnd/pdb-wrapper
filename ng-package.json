@@ -3,5 +3,10 @@
   "dest": "../../../dist/ngx-dnd/pdb",
   "lib": {
     "entryFile": "src/public_api.ts"
-  }
+  },
+  "whitelistedNonPeerDependencies": [
+     "types",
+     "pouchdb",
+     "pouchdb-find"
+   ]
 }
