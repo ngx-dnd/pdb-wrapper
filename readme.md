@@ -1,5 +1,5 @@
 
-# pdb-wrapper
+# pdb-wrapper - alfa version, should not be used
 
 ## Install
 
