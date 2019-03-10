@@ -12,18 +12,23 @@ PouchDB.plugin(PouchFind);
 })
 
 export class PdbCore {
-  constructor
-    (
+  constructor(
       private init: PdbInit,
-    ) {}
+    ) {
+      const db = this.init.db_connect();
+      db.createIndex({
+        index: {fields: ['_id', 'type', 'data']}
+      });
+    }
 
   put(type: string, data: any) {
     const db = this.init.db_connect();
     db.put({
       _id: new Date().toISOString(),
-      type: type,
-      data: data
+      type,
+      data
     })
+// tslint:disable: only-arrow-functions
       .then(function(response: any) {
         console_log('PUT: ', response);
         return response;
@@ -41,7 +46,7 @@ export class PdbCore {
           _id: id,
           _rev: doc._rev,
           type: doc.type,
-          data: data
+          data
         });
       })
       .then(function(response: any) {
@@ -67,9 +72,7 @@ export class PdbCore {
   get_by_type(type: string) {
     const db = this.init.db_connect();
     db.find({
-      selector: { type: type },
-      fields: ['_id', 'data'],
-      sort: ['_id']
+      selector: { type },
     })
       .then(function(result: any) {
         console_log('GET BY TYPE: ', result);
