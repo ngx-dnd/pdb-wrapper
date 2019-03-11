@@ -6,6 +6,7 @@ import { console_log } from './pdb-functions';
 
 
 PouchDB.plugin(PouchFind);
+// tslint:disable:object-literal-shorthand
 
 @Injectable({
   providedIn: 'root'
