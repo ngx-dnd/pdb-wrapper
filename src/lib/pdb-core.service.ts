@@ -12,10 +12,9 @@ PouchDB.plugin(PouchFind);
 })
 
 export class PdbCore {
-  constructor
-    (
+  constructor(
       private init: PdbInit,
-    ) {}
+  ) { }
 
   put(type: string, data: any) {
     const db = this.init.db_connect();
@@ -24,11 +23,11 @@ export class PdbCore {
       type: type,
       data: data
     })
-      .then(function(response: any) {
+      .then( (response: any) => {
         console_log('PUT: ', response);
         return response;
       })
-      .catch(function(err) {
+      .catch( (err) => {
         return err;
       });
   }
@@ -36,7 +35,7 @@ export class PdbCore {
   change(id: string, data: any) {
     const db = this.init.db_connect();
     db.get(id)
-      .then(function(doc: any) {
+      .then( (doc: any) => {
         return db.put({
           _id: id,
           _rev: doc._rev,
@@ -44,10 +43,11 @@ export class PdbCore {
           data: data
         });
       })
-      .then(function(response: any) {
+      .then( (response: any) => {
         console_log('CHANGE: ', response);
-        return response;      })
-      .catch(function(err) {
+        return response;
+      })
+      .catch( (err) => {
         return err;
       });
   }
@@ -55,11 +55,11 @@ export class PdbCore {
   get_by_id(id: string) {
     const db = this.init.db_connect();
     db.get(id)
-      .then(function(doc: any) {
+      .then((doc: any) => {
         console_log('GET BY ID: ', doc);
         return doc;
       })
-      .catch(function(err) {
+      .catch((err) => {
         return err;
       });
   }
@@ -71,11 +71,11 @@ export class PdbCore {
       fields: ['_id', 'data'],
       sort: ['_id']
     })
-      .then(function(result: any) {
+      .then( (result: any) => {
         console_log('GET BY TYPE: ', result);
         return result;
       })
-      .catch(function(err) {
+      .catch( (err) => {
         return err;
       });
   }
@@ -83,14 +83,14 @@ export class PdbCore {
   remove_by_id(id: string) {
     const db = this.init.db_connect();
     db.get(id)
-      .then(function(doc) {
+      .then( (doc) => {
         return db.remove(doc._id, doc._rev);
       })
-      .then(function(result: any) {
+      .then( (result: any) => {
         console_log('PUT: ', result);
         return result;
       })
-      .catch(function(err) {
+      .catch( (err) => {
         return err;
       });
   }
