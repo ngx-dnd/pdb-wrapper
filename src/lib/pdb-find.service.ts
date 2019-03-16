@@ -72,7 +72,6 @@ export class PdbFind {
       });
   }
 
-
   change_by_id_and_key(id: string, key: string, data: any) {
     const db = this.init.db_connect();
     db.get(id)

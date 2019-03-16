@@ -40,6 +40,7 @@ export class PdbKeys {
       });
   } // end: index();
 
+
   async get_doc(type: string, key: string) {
     this.index(type);
     const db = this.init.db_connect();
@@ -67,6 +68,18 @@ async get_doc_data(type: string, key: string) {
     console.log('pdb-keys.service>>get_doc_data(): ', err);
   }
 } // end: get_doc_data();
+
+
+async get_docs_by_type(type: string) {
+  const db = this.init.db_connect();
+  try {
+    const docs: any = await db.find({selector: { type: type }, fields: ['_id', 'data'], sort: ['_id']});
+    await delay(0);
+    return docs;
+  } catch (err) {
+    console.log('pdb-keys.service>>get_docs_by_type(): ', err);
+  }
+} // end: get_docs_by_type();
 
 
 
