@@ -4,6 +4,8 @@ import PouchFind from 'pouchdb-find';
 import { PdbInit } from './pdb-init.service';
 import { console_log } from './pdb-functions';
 import { PdbCore } from './pdb-core.service';
+import { NgxIndexedDB } from 'ngx-indexed-db';
+
 
 PouchDB.plugin(PouchFind);
 // tslint:disable:object-literal-shorthand
@@ -12,85 +14,88 @@ PouchDB.plugin(PouchFind);
 })
 export class PdbFind {
   constructor(
-      private init: PdbInit,
-      private pdbcore: PdbCore
+    private init: PdbInit,
+    private pdbcore: PdbCore
   ) { }
 
 
   create_index() {
     const db = this.init.db_connect();
     db.createIndex({
-      index: { fields: ['type', 'name'] }
+      index: { fields: ['type', 'key'] }
     });
   }
 
-  put_by_type_and_name(type: string, name: string, data: any): void {
+  put_by_type_and_key(type: string, key: string, data: any): void {
     this.create_index();
     const db = this.init.db_connect();
     db.find({
-      selector: { type: type, name: name},
-      fields: ['_id', 'type', 'name']
-      })
-      .then( (result: any) => {
-        console_log('GET BY TYPE AND NAME: ', result);
-        this.change_by_id_and_name(result.docs[0]._id, name, data);
+      selector: { type: type, key: key },
+      fields: ['_id', 'type', 'key']
+    })
+      .then((result: any) => {
+        console_log('GET BY TYPE AND key: ', result);
+        this.change_by_id_and_key(result.docs[0]._id, key, data);
         console.log(result);
-      }).catch( () => {
+      }).catch(() => {
         console.log();
         db.put({
           _id: new Date().toISOString(),
           type: type,
-          name: name,
+          key: key,
           data: data
         })
-          .then( (response: any) => {
+          .then((response: any) => {
             console_log('PUT: ', response);
             return response;
           })
-          .catch( (err) => {
+          .catch((err) => {
             console.log(err);
             return;
           });
       });
   }
 
-  get_by_type_and_name(type: string, name: string): any {
+  get_by_type_and_key(type: string, key: string): any {
     this.create_index();
     const db = this.init.db_connect();
     db.find({
-      selector: { type: type, name: name},
-      fields: ['type', 'name']
-      })
-      .then( (result: any) => {
-        console_log('GET BY TYPE AND NAME: ', result);
+      selector: { type: type, key: key },
+      fields: ['type', 'key']
+    })
+      .then((result: any) => {
+        console_log('GET BY TYPE AND key: ', result);
         result = result.docs[0].data[0];
         console.log(result);
-      }).catch( (err) => {
+      }).catch((err) => {
         return err;
       });
   }
 
-
-  change_by_id_and_name(id: string, name: string, data: any) {
+  change_by_id_and_key(id: string, key: string, data: any) {
     const db = this.init.db_connect();
     db.get(id)
-      .then( (doc: any) => {
+      .then((doc: any) => {
         return db.put({
           _id: id,
           _rev: doc._rev,
           type: doc.type,
-          name: doc.name,
+          key: doc.key,
           data: data
         });
       })
-      .then( (response: any) => {
+      .then((response: any) => {
         console_log('CHANGE: ', response);
         return response;
       })
-      .catch( (err) => {
+      .catch((err) => {
         return err;
       });
   }
+
+
+
+
 
 
 } // end: CLASS

@@ -65,7 +65,7 @@ export class PdbCore {
       });
   }
 
-  get_by_type(type: string) {
+  async get_by_type(type: string) {
     const db = this.init.db_connect();
     db.find({
       selector: { type: type },
